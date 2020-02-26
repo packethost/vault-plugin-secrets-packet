@@ -6,7 +6,7 @@ import (
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/vault/api"
 	"github.com/hashicorp/vault/sdk/plugin"
-	packet "github.com/t0mk/vault-plugin-secrets-packet"
+	packet "github.com/packethost/vault-plugin-secrets-packet"
 )
 
 func main() {

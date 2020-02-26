@@ -1,4 +1,4 @@
-module github.com/t0mk/vault-plugin-secrets-packet
+module github.com/packethost/vault-plugin-secrets-packet
 
 go 1.13
 
