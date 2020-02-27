@@ -14,6 +14,11 @@ and managing resources. You will need a Packet account to use this plugin.
 
 ## Installation
 
+### Download
+Download latest release for your arch from the [release page](https://github.com/packethost/vault-plugin-secrets-packet/releases).
+
+### Build yourself
+
 - Clone this repo
 - Run `make bootstrap` and `make dev`
 - Locate the directory where the binary `vault-plugin-secrets-packet` lives. It should be `./bin/` under this repo, e.g. `/home/tomk/vault-plugin-secrets-packet/bin`
