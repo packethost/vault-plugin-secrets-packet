@@ -1,6 +1,16 @@
 # Vault Secrets Engine plugin for Packet (https://packet.com)
 
-This is a [custom Vault secrets engine plugin](https://www.vaultproject.io/docs/plugin/). When installed in Vault, it allows to create temporary API keys in the Packet API. Vault then manages creation and removal of requested credentials.
+This is a [custom Vault secrets engine plugin](https://www.vaultproject.io/docs/plugin/). 
+When installed in Vault, it allows to create temporary API keys in the Packet API. 
+Vault then manages creation and removal of requested credentials.
+
+[Vault](https://www.vaultproject.io/) from [HashiCorp](https://www.hashicorp.com/)
+allows you to secure, store and tightly control access to tokens, passwords, 
+certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API.
+
+[Packet](https://www.packet.com/) is a bare metal cloud provider
+with an [API](https://www.packet.com/developers/api/) for provisioning
+and managing resources. You will need a Packet account to use this plugin.
 
 ## Installation
 
@@ -22,7 +32,9 @@ $ vault secrets enable --plugin-name='packet' --path="packet" plugin
 
 ### Dev setup
 
-Vault needs a storage backand and maybe it's too much work for you to install a consul cluster for testing. Fortunately, vault server supports "Development mode". You can get by with `config.hcl` as just:
+Vault needs a storage back end and maybe it's too much work for you 
+to install a Consul cluster for testing. Fortunately, Vault server 
+supports "Development mode". You can get by with `config.hcl` as just:
 
 ```
 plugin_directory = "/home/tomk/vault-plugin-secrets-packet/bin"
@@ -43,7 +55,7 @@ export VAULT_ADDR='http://127.0.0.1:8200'
 
 ## Usage
 
-In order to use the Packet secrests engine, you need to configure it with a user read-write API key:
+In order to use the Packet secrets engine, you need to configure it with a user read-write API key:
 
 ```
 $ vault kv put packet/config api_token=$PACKET_AUTH_TOKEN
@@ -106,7 +118,3 @@ Key              Value
 api_key_token    gsdrDRGrEGRSGDRGdgrgdrgdrgDrgdg3
 
 ```
-
-
-
-
