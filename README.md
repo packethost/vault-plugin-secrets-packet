@@ -123,3 +123,24 @@ Key              Value
 api_key_token    gsdrDRGrEGRSGDRGdgrgdrgdrgDrgdg3
 
 ```
+
+## Examples
+
+[Mayday](https://github.com/grahamc/mayday) is using Vault-generated ephemeral secrets to pipe output of SOS consoles from device in Packet to a local file.
+
+The plugin can also be simply used with curl: 
+
+```
+export VAULT_ADDR='http://127.0.0.1:8200'
+
+# first create a role
+vault kv put packet/role/short-read-only-user \
+    type=user read_only=true ttl=30 max_ttl=3600
+
+# query projects using Vault-generated credentials
+curl \
+     --header 'Accept: application/json' \
+     --header 'Content-Type: application/json' \
+     --header "X-Auth-Token: $(vault kv get -field=api_key_token packet/creds/short-read-only-user)" \
+     https://api.packet.net/projects
+``` 
