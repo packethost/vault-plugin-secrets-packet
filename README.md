@@ -1,4 +1,4 @@
-# Vault Secrets Engine plugin for Packet (https://packet.com)
+# Vault Secrets Engine plugin for Packet
 
 This is a [custom Vault secrets engine plugin](https://www.vaultproject.io/docs/plugin/). 
 When installed in Vault, it allows to create temporary API keys in the Packet API. 
