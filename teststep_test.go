@@ -195,6 +195,7 @@ func (e *testEnv) ReadProjectCreds(t *testing.T) {
 		t.Fatal("failed to receive api_key_id")
 	}
 	keyID := resp.Secret.InternalData["api_key_id"].(string)
+	e.APITokenID = keyID
 
 	apiKey, err := GetPacketProjectAPIKey(e.TestProjectID, keyID)
 	if err != nil {
@@ -243,6 +244,22 @@ func GetPacketUserAPIKey(id string) (*packngo.APIKey, error) {
 	return c.APIKeys.UserGet(id, nil)
 }
 
+func RemovePacketUserAPIKey(id string) error {
+	c, err := packngo.NewClient()
+	if err != nil {
+		return nil
+	}
+	_, err = c.APIKeys.Delete(id)
+	return err
+}
+
+func (e *testEnv) ManuallyRemoveUserCreds(t *testing.T) {
+	err := RemovePacketUserAPIKey(e.APITokenID)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func (e *testEnv) ReadUserCreds(t *testing.T) {
 	req := &logical.Request{
 		Operation: logical.ReadOperation,
@@ -264,6 +281,8 @@ func (e *testEnv) ReadUserCreds(t *testing.T) {
 		t.Fatal("failed to receive api_key_id")
 	}
 	keyID := resp.Secret.InternalData["api_key_id"].(string)
+
+	e.APITokenID = keyID
 
 	apiKey, err := GetPacketUserAPIKey(keyID)
 	if err != nil {

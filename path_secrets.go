@@ -33,8 +33,9 @@ func (b *backend) operationRevoke(ctx context.Context, req *logical.Request, d *
 	if err != nil {
 		return nil, err
 	}
-	_, err = client.APIKeys.Delete(keyID)
-	if err != nil {
+	resp, err := client.APIKeys.Delete(keyID)
+
+	if (err != nil) && (resp.Response.StatusCode != 404) {
 		return nil, err
 	}
 
