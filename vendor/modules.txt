@@ -90,7 +90,7 @@ github.com/mitchellh/go-testing-interface
 github.com/mitchellh/mapstructure
 # github.com/oklog/run v1.0.0
 github.com/oklog/run
-# github.com/packethost/packngo v0.2.1-0.20200220143658-05f78a847cb6
+# github.com/packethost/packngo v0.2.1-0.20200320175010-9cdf732e0c3e
 github.com/packethost/packngo
 # github.com/pierrec/lz4 v2.0.5+incompatible
 github.com/pierrec/lz4
