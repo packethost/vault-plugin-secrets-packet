@@ -17,8 +17,9 @@ const (
 var runAcceptanceTests = os.Getenv(envVarRunAccTests) == "1"
 
 type testEnv struct {
-	APIToken string
-	RoleName string
+	APIToken   string
+	RoleName   string
+	APITokenID string
 
 	Backend logical.Backend
 	Context context.Context
@@ -84,6 +85,27 @@ func TestUserCreds(t *testing.T) {
 	t.Run("read user creds", acceptanceTestEnv.ReadUserCreds)
 
 	t.Run("renew user creds", acceptanceTestEnv.RenewCreds)
+	t.Run("revoke user creds", acceptanceTestEnv.RevokeCreds)
+}
+
+func TestManuallyRemovedUserCreds(t *testing.T) {
+	if !runAcceptanceTests {
+		t.SkipNow()
+	}
+
+	acceptanceTestEnv, err := newAcceptanceTestEnv("testuserrole")
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Run("add config", acceptanceTestEnv.AddConfig)
+
+	t.Run("add user role", acceptanceTestEnv.AddUserRole)
+	t.Run("read user role", acceptanceTestEnv.ReadRole)
+	t.Run("read user creds", acceptanceTestEnv.ReadUserCreds)
+
+	t.Run("renew user creds", acceptanceTestEnv.RenewCreds)
+	t.Run("manualy remove API key (out of vault)",
+		acceptanceTestEnv.ManuallyRemoveUserCreds)
 	t.Run("revoke user creds", acceptanceTestEnv.RevokeCreds)
 }
 
