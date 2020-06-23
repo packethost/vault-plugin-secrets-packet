@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"strings"
 	"sync"
+	"time"
 
+	"github.com/hashicorp/go-retryablehttp"
 	"github.com/hashicorp/vault/sdk/framework"
 	"github.com/hashicorp/vault/sdk/logical"
 
@@ -89,7 +91,14 @@ func (b *backend) Client(ctx context.Context, s logical.Storage) (*packngo.Clien
 		return b.client, nil
 	}
 
-	b.client = packngo.NewClientWithAuth("Hashicorp Vault", conf.APIToken, nil)
+	httpClient := retryablehttp.NewClient()
+	httpClient.Logger = nil
+
+	httpClient.RetryWaitMin = time.Second
+	httpClient.RetryWaitMax = 30 * time.Second
+	httpClient.RetryMax = 10
+
+	b.client = packngo.NewClientWithAuth("Hashicorp Vault", conf.APIToken, httpClient)
 	return b.client, nil
 }
 
