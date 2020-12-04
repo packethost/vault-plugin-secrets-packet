@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Stability-Maintained-green.svg)
+
 # Vault Secrets Engine plugin for Packet
 
 This is a [custom Vault secrets engine plugin](https://www.vaultproject.io/docs/plugin/). 
@@ -11,6 +13,9 @@ certificates, encryption keys for protecting secrets and other sensitive data us
 [Packet](https://www.packet.com/) is a bare metal cloud provider
 with an [API](https://www.packet.com/developers/api/) for provisioning
 and managing resources. You will need a Packet account to use this plugin.
+
+This repository is [Maintained](https://github.com/packethost/standards/blob/master/maintained-statement.md) 
+meaning that this software is supported by Packet and its community - available to use in production environments.
 
 ## Installation
 
