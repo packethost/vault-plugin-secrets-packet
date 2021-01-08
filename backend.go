@@ -37,6 +37,7 @@ func NewBackend(system logical.SystemView) *backend {
 		},
 
 		Paths: []*framework.Path{
+			b.pathListRoles(),
 			b.pathRole(),
 			b.pathConfig(),
 			b.pathCredentials(),
