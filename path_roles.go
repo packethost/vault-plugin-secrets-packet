@@ -41,7 +41,7 @@ type roleEntry struct {
 
 func (b *backend) pathListRoles() *framework.Path {
 	return &framework.Path{
-		Pattern: "role/?$",
+		Pattern: "roles/?$",
 		Callbacks: map[logical.Operation]framework.OperationFunc{
 			logical.ListOperation: b.operationRolesList,
 		},
