@@ -190,15 +190,16 @@ func (b *backend) operationRoleRead(ctx context.Context, req *logical.Request, d
 	if role == nil {
 		return nil, nil
 	}
-	return &logical.Response{
-		Data: map[string]interface{}{
-			"type":       role.Type,
-			"read_only":  role.ReadOnly,
-			"project_id": role.ProjectID,
-			"ttl":        role.TTL / time.Second,
-			"max_ttl":    role.MaxTTL / time.Second,
-		},
-	}, nil
+	respData := map[string]interface{}{
+		"type":      role.Type,
+		"read_only": role.ReadOnly,
+		"ttl":       role.TTL / time.Second,
+		"max_ttl":   role.MaxTTL / time.Second,
+	}
+	if role.Type == TypeProject {
+		respData["project_id"] = role.ProjectID
+	}
+	return &logical.Response{Data: respData}, nil
 }
 
 func (b *backend) operationRoleDelete(ctx context.Context, req *logical.Request, data *framework.FieldData) (*logical.Response, error) {
